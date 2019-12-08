@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Creative - Start Bootstrap Theme</title>
+
+  <!-- Font Awesome Icons -->
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+  <!-- Plugin CSS -->
+  <link href="/static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+  <!-- Theme CSS - Includes Bootstrap -->
+  <link href="/static/css/creative.min.css" rel="stylesheet">
+ <script src="/static/wire/go.js"></script>
+
+</head>
+
+<body id="page-top" onload="init()">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+	  <a class="navbar-brand js-scroll-trigger" href="#contact">End</a>
+      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-uppercase text-white font-weight-bold">Rapid Prototyping</h1>
+          <hr class="divider my-4">
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5">Prototypes at your ease!! No more repeated Specification Drafts, no more mock-up codes!! Ready to deploy and deliver...</p>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section class="page-section bg-primary" id="about">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-white mt-0">We've got what you need!</h2>
+          <hr class="divider light my-4">
+          <p class="text-white-50 mb-4">Just a click away to get your Prototypes ready from Business Requirement Recording!!</p>
+		  
+            <div class="form-row justify-content-center">
+			  <div class="col-2 col-md-0 mb-0">
+				<a class="fas fa-3x fa-file-audio text-white" title="Select Audio File"></a>
+			  </div>
+              <div class="text-center">
+                <input type="File"  onchange="SaveData()" class="form-control hide form-control-lg" id="readfile">
+				<button class="btn btn-light btn-lg font-weight-bold"  style="color:#f4623a; font-weight: bolder" onclick="TriggerClick()">Upload Recording</button>
+              </div>
+              <div class="col-7 col-md-3">
+				<!--<a class="btn btn-lg btn-light js-scroll-trigger" style="color:#f4623a; font-weight: bolder" href="#editor" id="genspec">Generate Spec</a>-->
+				<!--<a class="btn-lg btn-light fas fa-4x fa-cloud-upload-alt text-primary mb-4"  id="genspec"> Generate Spec</a> -->
+				<!--<a class="fas fa-2x fa-file-word text-white mb-2" href="#editor" id="genspec">Generate Spec</a> -->
+				<button type="button" class="js-scroll-trigger" style="background-color:#fff " onclick="onSpec()"><a class="fas fa-1x fa-cloud-upload-alt text-primary mb-3" href="#waiting" id="genspec">  Spec Generator</a></button>
+              </div>
+            </div>        
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <header class="masthead align-items-center  hide" style="height: 100vh; background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url('img/wait.jpg');" id="waiting">
+    <div class="container text-center">
+      <br></br><h2 class="text-white  mb-10">Creating requirement specification document from Audio File!<br></br>Please wait ......</h2><br></br>
+	  <div class="align-items-center">	
+		<img src="img/preload.gif" alt="" id="loader">
+		<br></br><button class="col-lg-6 btn btn-primary btn-xl js-scroll-trigger" href="#editor" id="viewspec" disabled onclick="onView()">View the Specification</a>
+	  </div>
+    </div>
+   </header>
+ 
+  
+  <section class="page-section hide" id="editor">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h2 class="mt-0">Specification document in text format is ready!</h2>
+          <hr class="divider my-4">
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-muted mb-5">Documents can be reviewed online and rectified!! Click on "Review/Update" once finished for Prototypes... </p>
+		  <textarea rows="35" cols="55" align="center" id="reviewfile" autofocus placeholder="You can read, edit and submit the corrections to your requirement doc here..."></textarea>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" id="update" href="#services">Review and Update</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Services Section -->
+  <section class="page-section" id="services">
+    <div class="container">
+      <h2 class="text-center mt-0">At Your Service</h2>
+      <hr class="divider my-4">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+			<!--<a class="fas fa-4x fa-gem text-primary mb-4" href="img/portfolio/fullsize/1.jpg" id="genwire"></a>	-->
+            <button type="button" style="border:none; background-color:#fff " onclick="Generate_wire_frame()">
+              <a class="fas fa-4x fa-gem text-primary mb-4"  id="genwire"></a></button>
+            <h3 class="h4 mb-2">Design Wireframe</h3>
+            <p class="text-muted mb-0"></p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+            <a class="fas fa-4x fa-laptop-code text-primary mb-4" href="/static/img/portfolio/fullsize/2.jpg" id ="genui"></a>
+            <h3 class="h4 mb-2">Generate GUI</h3>
+            <p class="text-muted mb-0"></p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+            <a class="fas fa-4x fa-flask text-primary mb-4" href="/static/img/portfolio/fullsize/3.jpg" id="genapi"></a>
+            <h3 class="h4 mb-2">Dynamic API</h3>
+            <p class="text-muted mb-0"></p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+            <a class="fas fa-4x fa-graduation-cap text-primary mb-4" href="/static/img/portfolio/fullsize/4.jpg" id="gentc"></a>
+            <h3 class="h4 mb-2">Automate TestCases</h3>
+            <p class="text-muted mb-0"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--  Display section-->
+
+    <section>
+      <div  style="width: 80%;display: flex;justify-content: space-between;margin: 0 0 0 10%;">
+      <!--<div id="myPaletteDiv" style="width: 100px; margin-right: 2px; background-color: #282c34;"></div>-->
+           <div id="myDiagramDiv" class="hide" style="flex-grow: 1; height: 750px; background-color: #282c34;"></div>
+      </div>
+  </section>
+
+
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/1.jpg">
+            <img  class="img-fluid" src="/static/img/portfolio/thumbnails/1.jpg" alt="">
+            <div class="portfolio-box-caption">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/2.jpg">
+            <img class="img-fluid" src="/static/img/portfolio/thumbnails/2.jpg" alt="">
+            <div class="portfolio-box-caption">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/3.jpg">
+            <img class="img-fluid" src="/static/img/portfolio/thumbnails/3.jpg" alt="">
+            <div class="portfolio-box-caption">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/4.jpg">
+            <img class="img-fluid" src="/static/img/portfolio/thumbnails/4.jpg" alt="">
+            <div class="portfolio-box-caption">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/5.jpg">
+            <img class="img-fluid" src="/static/img/portfolio/thumbnails/5.jpg" alt="">
+            <div class="portfolio-box-caption">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box" href="/static/img/portfolio/fullsize/6.jpg">
+            <img class="img-fluid" src="/static/img/portfolio/thumbnails/6.jpg" alt="">
+            <div class="portfolio-box-caption p-3">
+              <div class="project-category text-white-50">
+                Category
+              </div>
+              <div class="project-name">
+                Project Name
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="page-section bg-dark text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">Download Specification Doc and POC!!</h2>
+      <a class="btn btn-light btn-xl" href="https://proto.com/s3/req_doc" id="downloadzip">Download Now!</a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="mt-0">Let's Get In Touch!</h2>
+          <hr class="divider my-4">
+          <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an email and we will get back to you as soon as possible!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+          <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+          <div>9123456789</div>
+        </div>
+        <div class="col-lg-4 mr-auto text-center">
+          <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+          <!-- Make sure to change the email address in anchor text AND the link below! -->
+          <a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <!--<footer class="bg-light py-5">
+    <div class="container">
+      <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
+    </div>
+  </footer>-->
+
+  <!-- Bootstrap core JavaScript -->
+  
+  
+  <style>
+  .hide {
+  
+  display:none;
+  
+  }
+  textarea {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 804px;
+    overflow: auto;
+	font-size: 25px;
+
+    width: 100%;
+    border: 4px solid #fab256;
+}
+
+.stop-scrolling { 
+    height: 100%; 
+    overflow: hidden; 
+} 
+  
+  </style>
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="/static/js/creative.min.js"></script>
+
+  
+  <script>
+	function loadDoc(filename) {
+	  alert("Generating Wireframe...Please wait")
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		  var data = JSON.parse(this.responseText)
+		  $('#editor').removeClass("hide");
+		  $('#reviewfile').val(data['foo']['alternative'][0]['transcript']);
+		  alert(this.responseText);
+
+		}
+	  };
+	  xhttp.open("GET", "http://127.0.0.1:8000/get-text/"+filename, true);
+	  xhttp.send();
+	}
+	
+	
+	function SaveData() {
+	var form = new FormData()
+	form.append('myfile',document.getElementById('readfile').files[0])
+
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		
+		  alert(this.responseText);
+		  var data =JSON.parse(this.responseText)
+		  loadDoc(data['name'])
+
+		  
+		}
+	  };
+	  xhttp.open("POST", "http://127.0.0.1:8000/api/", true);
+	  xhttp.send(form);
+	}
+	
+	function TriggerClick(){	
+	   browse_win = document.getElementById('readfile')
+	   browse_win.click();
+	}
+	
+	function onSpec(){	
+	  load_sec = document.getElementById('waiting')
+	  load_sec.style.display = "block";
+	  document.body.classList.add("stop-scrolling");
+
+	  setTimeout(function(){
+		document.getElementById("viewspec").disabled = false; 
+		document.getElementById('loader').style.display = "none";},
+	   1000);	      		//enable this button only after doc is ready
+	  //check from backend if doc is ready and then disable ViewSpec Button
+	  //alert(document.getElementById("viewspec").getAttribute("href"));
+	  //Progress bar can be changed to 100% once backend task completed.   id=#inprogress
+	}
+	
+	function onView(){	
+	  edit_txt = document.getElementById('editor')
+	  edit_txt.style.display = "block";
+	  document.body.classList.remove("stop-scrolling"); 
+	  load_sec = document.getElementById('waiting')
+	  load_sec.style.display = "none";
+	  
+	}
+
+
+
+	function Generate_wire_frame(){
+
+
+    $('#myDiagramDiv').removeClass("hide");
+    load()
+
+	}
+	</script>
+<script id="code">
+ var results ={ "class": "go.GraphLinksModel",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"category":"Comment", "loc":"360 -10", "text":"Flow Chard", "key":-13},
+{"key":-1, "category":"Start", "loc":"175 0", "text":"Start"},
+{"key":0, "loc":"175 100", "text":"Shreyas 1"},
+{"key":1, "loc":"175 100", "text":"shreyas 2"},
+{"key":2, "loc":"175 200", "text":"shreyas 3"},
+{"key":3, "loc":"175 290", "text":"shreyas  4"},
+{"key":-2, "category":"End", "loc":"175 390", "text":"Enjoy!"}
+ ],
+  "linkDataArray": [
+{"from":-1, "to":0, "fromPort":"B", "toPort":"T"},
+{"from":1, "to":2, "fromPort":"B", "toPort":"T"},
+{"from":1, "to":3, "fromPort":"B", "toPort":"T"},
+{"from":2, "to":3, "fromPort":"B", "toPort":"T"},
+{"from":3, "to":-2, "fromPort":"B", "toPort":"T"}
+ ]}
+
+    function init() {
+      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+      var $ = go.GraphObject.make;  // for conciseness in defining templates
+
+      myDiagram =
+        $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+          {
+            "LinkDrawn": showLinkLabel,  // this DiagramEvent listener is defined below
+            "LinkRelinked": showLinkLabel,
+            "undoManager.isEnabled": true  // enable undo & redo
+          });
+
+      // when the document is modified, add a "*" to the title and enable the "Save" button
+      myDiagram.addDiagramListener("Modified", function(e) {
+        var button = document.getElementById("SaveButton");
+        if (button) button.disabled = !myDiagram.isModified;
+        var idx = document.title.indexOf("*");
+        if (myDiagram.isModified) {
+          if (idx < 0) document.title += "*";
+        } else {
+          if (idx >= 0) document.title = document.title.substr(0, idx);
+        }
+      });
+
+      // helper definitions for node templates
+
+      function nodeStyle() {
+        return [
+          // The Node.location comes from the "loc" property of the node data,
+          // converted by the Point.parse static method.
+          // If the Node.location is changed, it updates the "loc" property of the node data,
+          // converting back using the Point.stringify static method.
+          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          {
+            // the Node.location is at the center of each node
+            locationSpot: go.Spot.Center
+          }
+        ];
+      }
+
+      // Define a function for creating a "port" that is normally transparent.
+      // The "name" is used as the GraphObject.portId,
+      // the "align" is used to determine where to position the port relative to the body of the node,
+      // the "spot" is used to control how links connect with the port and whether the port
+      // stretches along the side of the node,
+      // and the boolean "output" and "input" arguments control whether the user can draw links from or to the port.
+      function makePort(name, align, spot, output, input) {
+        var horizontal = align.equals(go.Spot.Top) || align.equals(go.Spot.Bottom);
+        // the port is basically just a transparent rectangle that stretches along the side of the node,
+        // and becomes colored when the mouse passes over it
+        return $(go.Shape,
+          {
+            fill: "transparent",  // changed to a color in the mouseEnter event handler
+            strokeWidth: 0,  // no stroke
+            width: horizontal ? NaN : 8,  // if not stretching horizontally, just 8 wide
+            height: !horizontal ? NaN : 8,  // if not stretching vertically, just 8 tall
+            alignment: align,  // align the port on the main Shape
+            stretch: (horizontal ? go.GraphObject.Horizontal : go.GraphObject.Vertical),
+            portId: name,  // declare this object to be a "port"
+            fromSpot: spot,  // declare where links may connect at this port
+            fromLinkable: output,  // declare whether the user may draw links from here
+            toSpot: spot,  // declare where links may connect at this port
+            toLinkable: input,  // declare whether the user may draw links to here
+            cursor: "pointer",  // show a different cursor to indicate potential link point
+            mouseEnter: function(e, port) {  // the PORT argument will be this Shape
+              if (!e.diagram.isReadOnly) port.fill = "rgba(255,0,255,0.5)";
+            },
+            mouseLeave: function(e, port) {
+              port.fill = "transparent";
+            }
+          });
+      }
+
+      function textStyle() {
+        return {
+          font: "bold 11pt Lato, Helvetica, Arial, sans-serif",
+          stroke: "#F8F8F8"
+        }
+      }
+
+      // define the Node templates for regular nodes
+
+      myDiagram.nodeTemplateMap.add("",  // the default category
+        $(go.Node, "Table", nodeStyle(),
+          // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+          $(go.Panel, "Auto",
+            $(go.Shape, "Rectangle",
+              { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+              new go.Binding("figure", "figure")),
+            $(go.TextBlock, textStyle(),
+              {
+                margin: 8,
+                maxSize: new go.Size(160, NaN),
+                wrap: go.TextBlock.WrapFit,
+                editable: true
+              },
+              new go.Binding("text").makeTwoWay())
+          ),
+          // four named ports, one on each side:
+          makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
+          makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+          makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+          makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
+        ));
+
+      myDiagram.nodeTemplateMap.add("Conditional",
+        $(go.Node, "Table", nodeStyle(),
+          // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+          $(go.Panel, "Auto",
+            $(go.Shape, "Diamond",
+              { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+              new go.Binding("figure", "figure")),
+            $(go.TextBlock, textStyle(),
+              {
+                margin: 8,
+                maxSize: new go.Size(160, NaN),
+                wrap: go.TextBlock.WrapFit,
+                editable: true
+              },
+              new go.Binding("text").makeTwoWay())
+          ),
+          // four named ports, one on each side:
+          makePort("T", go.Spot.Top, go.Spot.Top, false, true),
+          makePort("L", go.Spot.Left, go.Spot.Left, true, true),
+          makePort("R", go.Spot.Right, go.Spot.Right, true, true),
+          makePort("B", go.Spot.Bottom, go.Spot.Bottom, true, false)
+        ));
+
+      myDiagram.nodeTemplateMap.add("Start",
+        $(go.Node, "Table", nodeStyle(),
+          $(go.Panel, "Spot",
+            $(go.Shape, "Circle",
+              { desiredSize: new go.Size(70, 70), fill: "#282c34", stroke: "#09d3ac", strokeWidth: 3.5 }),
+            $(go.TextBlock, "Start", textStyle(),
+              new go.Binding("text"))
+          ),
+          // three named ports, one on each side except the top, all output only:
+          makePort("L", go.Spot.Left, go.Spot.Left, true, false),
+          makePort("R", go.Spot.Right, go.Spot.Right, true, false),
+          makePort("B", go.Spot.Bottom, go.Spot.Bottom, true, false)
+        ));
+
+      myDiagram.nodeTemplateMap.add("End",
+        $(go.Node, "Table", nodeStyle(),
+          $(go.Panel, "Spot",
+            $(go.Shape, "Circle",
+              { desiredSize: new go.Size(60, 60), fill: "#282c34", stroke: "#DC3C00", strokeWidth: 3.5 }),
+            $(go.TextBlock, "End", textStyle(),
+              new go.Binding("text"))
+          ),
+          // three named ports, one on each side except the bottom, all input only:
+          makePort("T", go.Spot.Top, go.Spot.Top, false, true),
+          makePort("L", go.Spot.Left, go.Spot.Left, false, true),
+          makePort("R", go.Spot.Right, go.Spot.Right, false, true)
+        ));
+
+      // taken from ../extensions/Figures.js:
+      go.Shape.defineFigureGenerator("File", function(shape, w, h) {
+        var geo = new go.Geometry();
+        var fig = new go.PathFigure(0, 0, true); // starting point
+        geo.add(fig);
+        fig.add(new go.PathSegment(go.PathSegment.Line, .75 * w, 0));
+        fig.add(new go.PathSegment(go.PathSegment.Line, w, .25 * h));
+        fig.add(new go.PathSegment(go.PathSegment.Line, w, h));
+        fig.add(new go.PathSegment(go.PathSegment.Line, 0, h).close());
+        var fig2 = new go.PathFigure(.75 * w, 0, false);
+        geo.add(fig2);
+        // The Fold
+        fig2.add(new go.PathSegment(go.PathSegment.Line, .75 * w, .25 * h));
+        fig2.add(new go.PathSegment(go.PathSegment.Line, w, .25 * h));
+        geo.spot1 = new go.Spot(0, .25);
+        geo.spot2 = go.Spot.BottomRight;
+        return geo;
+      });
+
+      myDiagram.nodeTemplateMap.add("Comment",
+        $(go.Node, "Auto", nodeStyle(),
+          $(go.Shape, "File",
+            { fill: "#282c34", stroke: "#DEE0A3", strokeWidth: 3 }),
+          $(go.TextBlock, textStyle(),
+            {
+              margin: 8,
+              maxSize: new go.Size(200, NaN),
+              wrap: go.TextBlock.WrapFit,
+              textAlign: "center",
+              editable: true
+            },
+            new go.Binding("text").makeTwoWay())
+          // no ports, because no links are allowed to connect with a comment
+        ));
+
+
+      // replace the default Link template in the linkTemplateMap
+      myDiagram.linkTemplate =
+        $(go.Link,  // the whole link panel
+          {
+            routing: go.Link.AvoidsNodes,
+            curve: go.Link.JumpOver,
+            corner: 5, toShortLength: 4,
+            relinkableFrom: true,
+            relinkableTo: true,
+            reshapable: true,
+            resegmentable: true,
+            // mouse-overs subtly highlight links:
+            mouseEnter: function(e, link) { link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)"; },
+            mouseLeave: function(e, link) { link.findObject("HIGHLIGHT").stroke = "transparent"; },
+            selectionAdorned: false
+          },
+          new go.Binding("points").makeTwoWay(),
+          $(go.Shape,  // the highlight shape, normally transparent
+            { isPanelMain: true, strokeWidth: 8, stroke: "transparent", name: "HIGHLIGHT" }),
+          $(go.Shape,  // the link path shape
+            { isPanelMain: true, stroke: "gray", strokeWidth: 2 },
+            new go.Binding("stroke", "isSelected", function(sel) { return sel ? "dodgerblue" : "gray"; }).ofObject()),
+          $(go.Shape,  // the arrowhead
+            { toArrow: "standard", strokeWidth: 0, fill: "gray" }),
+          $(go.Panel, "Auto",  // the link label, normally not visible
+            { visible: false, name: "LABEL", segmentIndex: 2, segmentFraction: 0.5 },
+            new go.Binding("visible", "visible").makeTwoWay(),
+            $(go.Shape, "RoundedRectangle",  // the label shape
+              { fill: "#F8F8F8", strokeWidth: 0 }),
+            $(go.TextBlock, "Yes",  // the label
+              {
+                textAlign: "center",
+                font: "10pt helvetica, arial, sans-serif",
+                stroke: "#333333",
+                editable: true
+              },
+              new go.Binding("text").makeTwoWay())
+          )
+        );
+
+      // Make link labels visible if coming out of a "conditional" node.
+      // This listener is called by the "LinkDrawn" and "LinkRelinked" DiagramEvents.
+      function showLinkLabel(e) {
+        var label = e.subject.findObject("LABEL");
+        if (label !== null) label.visible = (e.subject.fromNode.data.category === "Conditional");
+      }
+
+      // temporary links used by LinkingTool and RelinkingTool are also orthogonal:
+      myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
+      myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
+
+       // load an initial diagram from some JSON text
+
+      // initialize the Palette that is on the left side of the page
+      myPalette =
+        $(go.Palette, "myPaletteDiv",  // must name or refer to the DIV HTML element
+          {
+            // Instead of the default animation, use a custom fade-down
+            "animationManager.initialAnimationStyle": go.AnimationManager.None,
+            "InitialAnimationStarting": animateFadeDown, // Instead, animate with this function
+
+            nodeTemplateMap: myDiagram.nodeTemplateMap,  // share the templates used by myDiagram
+            model: new go.GraphLinksModel([  // specify the contents of the Palette
+              { category: "Start", text: "Start" },
+              { text: "Step" },
+              { category: "Conditional", text: "???" },
+              { category: "End", text: "End" },
+              { category: "Comment", text: "Comment" }
+            ])
+          });
+
+      // This is a re-implementation of the default animation, except it fades in from downwards, instead of upwards.
+      function animateFadeDown(e) {
+        var diagram = e.diagram;
+        var animation = new go.Animation();
+        animation.isViewportUnconstrained = true; // So Diagram positioning rules let the animation start off-screen
+        animation.easing = go.Animation.EaseOutExpo;
+        animation.duration = 900;
+        // Fade "down", in other words, fade in from above
+        animation.add(diagram, 'position', diagram.position.copy().offset(0, 200), diagram.position);
+        animation.add(diagram, 'opacity', 0, 1);
+        animation.start();
+      }
+
+    } // end init
+
+
+    // Show the diagram's model in JSON format that the user may edit
+    function save() {
+      document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+      myDiagram.isModified = false;
+    }
+    function load() {
+      myDiagram.model = go.Model.fromJson(results);
+    }
+
+    // print the diagram by opening a new window holding SVG images of the diagram contents for each page
+    function printDiagram() {
+      var svgWindow = window.open();
+      if (!svgWindow) return;  // failure to open a new Window
+      var printSize = new go.Size(700, 960);
+      var bnds = myDiagram.documentBounds;
+      var x = bnds.x;
+      var y = bnds.y;
+      while (y < bnds.bottom) {
+        while (x < bnds.right) {
+          var svg = myDiagram.makeSVG({ scale: 1.0, position: new go.Point(x, y), size: printSize });
+          svgWindow.document.body.appendChild(svg);
+          x += printSize.width;
+        }
+        x = bnds.x;
+        y += printSize.height;
+      }
+      setTimeout(function() { svgWindow.print(); }, 1);
+    }
+
+</script>
+</body>
+</html>
