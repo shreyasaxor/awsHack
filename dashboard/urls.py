@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import save_file,dashboard,convert_voice,get_test_case
+from .views import save_file,dashboard,convert_voice,get_test_case,get_machine_json
 urlpatterns = [
     path('api/', view=save_file),
     path('dashboard/', view=dashboard),
     path('get-text/<str:filename>', view=convert_voice),
     # path('convert-utility/', view=convert_voice),
     path('get-test-case/', view=get_test_case),
+    path('get-machine-json/', view=get_machine_json),
 ]

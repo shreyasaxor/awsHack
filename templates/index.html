@@ -124,7 +124,7 @@
         <div class="col-lg-8 align-self-baseline">
           <p class="text-muted mb-5">Documents can be reviewed online and rectified!! Click on "Review/Update" once finished for Prototypes... </p>
 		  <textarea rows="35" cols="55" align="center" id="reviewfile" autofocus placeholder="You can read, edit and submit the corrections to your requirement doc here..."></textarea>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" id="update" href="#services">Review and Update</a>
+          <button class="btn btn-primary btn-xl js-scroll-trigger" onclick="SaveMachine()">Review and Update</button>
         </div>
       </div>
     </div>
@@ -346,7 +346,8 @@
   <script src="/static/js/creative.min.js"></script>
 
   
-  <script>
+<script id="code">
+
 	function loadDoc(filename) {
 	  alert("Generating Wireframe...Please wait")
 	  var xhttp = new XMLHttpRequest();
@@ -362,8 +363,8 @@
 	  xhttp.open("GET", "http://127.0.0.1:8000/get-text/"+filename, true);
 	  xhttp.send();
 	}
-	
-	
+
+
 	function SaveData() {
 	var form = new FormData()
 	form.append('myfile',document.getElementById('readfile').files[0])
@@ -371,76 +372,157 @@
 	  var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-		
+
 		  alert(this.responseText);
 		  var data =JSON.parse(this.responseText)
 		  loadDoc(data['name'])
 
-		  
+
 		}
 	  };
 	  xhttp.open("POST", "http://127.0.0.1:8000/api/", true);
 	  xhttp.send(form);
 	}
-	
-	function TriggerClick(){	
+
+	function TriggerClick(){
 	   browse_win = document.getElementById('readfile')
 	   browse_win.click();
 	}
-	
-	function onSpec(){	
+
+	function onSpec(){
 	  load_sec = document.getElementById('waiting')
 	  load_sec.style.display = "block";
 	  document.body.classList.add("stop-scrolling");
 
 	  setTimeout(function(){
-		document.getElementById("viewspec").disabled = false; 
+		document.getElementById("viewspec").disabled = false;
 		document.getElementById('loader').style.display = "none";},
 	   1000);	      		//enable this button only after doc is ready
 	  //check from backend if doc is ready and then disable ViewSpec Button
 	  //alert(document.getElementById("viewspec").getAttribute("href"));
 	  //Progress bar can be changed to 100% once backend task completed.   id=#inprogress
 	}
-	
-	function onView(){	
+
+	function onView(){
 	  edit_txt = document.getElementById('editor')
 	  edit_txt.style.display = "block";
-	  document.body.classList.remove("stop-scrolling"); 
+	  document.body.classList.remove("stop-scrolling");
 	  load_sec = document.getElementById('waiting')
 	  load_sec.style.display = "none";
-	  
+
+	}
+
+
+ var MachineData=''
+
+	function SaveMachine(){
+	MachineData=''
+
+
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+
+		  MachineData= JSON.parse(this.responseText)
+
+          generatePriority(MachineData)
+
+
+		}
+	  };
+	  xhttp.open("POST", "http://127.0.0.1:8000/get-machine-json/", false);
+	  xhttp.send(JSON.stringify({'text':document.getElementById('reviewfile').value}));
 	}
 
 
 
-	function Generate_wire_frame(){
+    function generatePriority(MachineData){
+        console.log(MachineData)
+
+        var od =[]
+        var ud =[]
+
+        for(x in MachineData){
+          if(MachineData[x]['type'] != 'button'){
+
+              od.push(MachineData[x]['field'])
+
+          }else{
+              ud.push(MachineData[x]['field'])
+
+          }
+         }
+
+
+
+       for(i=0;i<ud.length;i++){
+          od.push(ud[i])
+       }
+       console.log(od)
+
+
+     var results ={ "class": "go.GraphLinksModel",
+                    "linkFromPortIdProperty": "fromPort",
+                    "linkToPortIdProperty": "toPort",
+                    "nodeDataArray": [
+                        {"category":"Comment", "loc":"360 -10", "text":"Flow Chard", "key":-13},
+                        {"key":-1, "category":"Start", "loc":"175 0", "text":"Start"},
+                        {"key":-2, "category":"End", "loc":"175 390", "text":"end!"}
+
+                    ],
+                    "linkDataArray": [
+                    {"from":-1, "to":0, "fromPort":"B", "toPort":"T"},
+
+                    ]
+         }
+
+
+
+    var nodeDataArray = [
+        {"category":"Comment", "loc":"360 -10", "text":"Flow Chard", "key":-13},
+        {"key":-1, "category":"Start", "loc":"175 0", "text":"Start"},
+
+
+         ]
+
+    var linkDataArray = [
+        {"from":-1, "to":0, "fromPort":"B", "toPort":"T"}
+         ]
+
+      for(i=0;i<od.length;i++){
+          var x=i+1
+          nodeDataArray.splice(i+2,0,{"key":i,"loc":"175 "+ x*100, "text":od[i]})
+       }
+       nodeDataArray.splice(od.length+1,0,{key: -2, category: "End", loc: "175 "+ x*100, text: "end!"})
+
+           for(i=0;i<od.length;i++){
+
+
+                linkDataArray.splice(i+1,0, {"from":i, "to":i+1, "fromPort":"B", "toPort":"T"})
+
+
+           }
+           linkDataArray.splice(od.length,0, {"from":od.length, "to":-2, "fromPort":"B", "toPort":"T"})
+
+          console.log(od.length)
+          results['nodeDataArray'] = nodeDataArray
+          results['linkDataArray'] = linkDataArray
+          console.log(results)
+           Generate_wire_frame(results)
+    }
+
+
+	function Generate_wire_frame(results){
 
 
     $('#myDiagramDiv').removeClass("hide");
-    load()
+    load(results)
 
 	}
+
+
 	</script>
-<script id="code">
- var results ={ "class": "go.GraphLinksModel",
-  "linkFromPortIdProperty": "fromPort",
-  "linkToPortIdProperty": "toPort",
-  "nodeDataArray": [
-{"category":"Comment", "loc":"360 -10", "text":"Flow Chard", "key":-13},
-{"key":-1, "category":"Start", "loc":"175 0", "text":"Start"},
-{"key":0, "loc":"175 100", "text":"Shreyas 1"},
-{"key":1, "loc":"175 100", "text":"shreyas 2"},
-{"key":2, "loc":"175 200", "text":"shreyas 3"},
-{"key":3, "loc":"175 290", "text":"shreyas  4"},
-{"key":-2, "category":"End", "loc":"175 390", "text":"Enjoy!"}
- ],
-  "linkDataArray": [
-{"from":-1, "to":0, "fromPort":"B", "toPort":"T"},
-{"from":1, "to":2, "fromPort":"B", "toPort":"T"},
-{"from":1, "to":3, "fromPort":"B", "toPort":"T"},
-{"from":2, "to":3, "fromPort":"B", "toPort":"T"},
-{"from":3, "to":-2, "fromPort":"B", "toPort":"T"}
- ]}
+<script>
 
     function init() {
       if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
@@ -726,9 +808,7 @@
       document.getElementById("mySavedModel").value = myDiagram.model.toJson();
       myDiagram.isModified = false;
     }
-    function load() {
-      myDiagram.model = go.Model.fromJson(results);
-    }
+
 
     // print the diagram by opening a new window holding SVG images of the diagram contents for each page
     function printDiagram() {
@@ -749,7 +829,11 @@
       }
       setTimeout(function() { svgWindow.print(); }, 1);
     }
+ function load(results) {
 
+      myDiagram.model = go.Model.fromJson(results);
+console.log(results)
+    }
 </script>
 </body>
 </html>

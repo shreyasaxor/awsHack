@@ -2,9 +2,12 @@ import speech_recognition as sr
 import boto3
 from botocore.client import Config
 
-ACCESS_KEY_ID = 'AKIAIY6TEJKN4SYG75YQ'
-ACCESS_SECRET_KEY = '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'
-BUCKET_NAME = 'shreyasnivya'
+ACCESS_KEY_ID = 'AKIAJVFVKHEVW7L3KTQQ'
+ACCESS_SECRET_KEY = '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'
+BUCKET_NAME = 'hackthonbucket'
+
+
+
 
 def pushTos3(filepath,filename):
 	try:
