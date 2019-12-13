@@ -64,9 +64,9 @@ convert_voice = ConvertVoiceText.as_view()
 @method_decorator(csrf_exempt, name='dispatch')
 class GetTestCase(View):
 
-
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         req = "create a log in page with user name and password"
+        request.body.decode('utf-8')
         recommendation = {'testcase': []}
         test_cases = pd.read_csv('media/data/testcases.csv', header=None)
 
