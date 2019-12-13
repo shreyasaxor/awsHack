@@ -11,7 +11,7 @@ docutils==0.15.2
 idna==2.8
 importlib-metadata==1.2.0
 jmespath==0.9.4
-more-itertools==8.0.2
+more-itertools==8.0.0
 murmurhash==1.0.2
 numpy==1.17.4
 pandas==0.24.2
@@ -19,7 +19,7 @@ pkg-resources==0.0.0
 plac==1.1.3
 preshed==3.0.2
 pydub==0.23.1
-python-dateutil==2.8.0
+python-dateutil==2.8.1
 pytz==2019.3
 requests==2.22.0
 s3transfer==0.2.1
@@ -29,7 +29,7 @@ SpeechRecognition==3.8.1
 sqlparse==0.3.0
 srsly==0.2.0
 thinc==7.3.1
-tqdm==4.40.1
+tqdm==4.40.0
 urllib3==1.25.7
 vectors==1.0.0
 wasabi==0.4.2
