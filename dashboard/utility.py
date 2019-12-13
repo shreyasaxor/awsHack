@@ -2,8 +2,8 @@ import speech_recognition as sr
 import boto3
 from botocore.client import Config
 
-ACCESS_KEY_ID = 'AKIAJVFVKHEVW7L3KTQQ'
-ACCESS_SECRET_KEY = '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'
+ACCESS_KEY_ID = ''
+ACCESS_SECRET_KEY = ''
 BUCKET_NAME = 'hackthonbucket'
 
 
