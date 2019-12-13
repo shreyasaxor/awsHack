@@ -426,7 +426,7 @@
 
 		}
 	  };
-	  xhttp.open("GET", "http://127.0.0.1:8000/get-text/"+filename, true);
+	  xhttp.open("GET", "/get-text/"+filename, true);
 	  xhttp.send();
 	}
 
@@ -446,7 +446,7 @@
 
 		}
 	  };
-	  xhttp.open("POST", "http://127.0.0.1:8000/api/", true);
+	  xhttp.open("POST", "/api/", true);
 	  xhttp.send(form);
 	}
 
@@ -498,7 +498,7 @@
 
 		}
 	  };
-	  xhttp.open("POST", "http://127.0.0.1:8000/get-machine-json/", false);
+	  xhttp.open("POST", "/get-machine-json/", false);
 	  xhttp.send(JSON.stringify({'text':document.getElementById('reviewfile').value}));
 	}
 
